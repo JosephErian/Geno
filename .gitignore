@@ -1,0 +1,68 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Rider/JetBrains
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# DotCover
+*.dotCover
+
+# Logs
+*.log
+
+# Entity Framework Migrations
+Migrations/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Secrets & configs
+appsettings.Development.json
+appsettings.*.local.json
+secrets.json
+
+# Publish output
+publish/
+*.db
+*.sqlite
+*.bak
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Auto-generated files
+Generated_Code/
+
+# Test results
+TestResults/
+
+# Coverage tools
+coverage/
+*.coverage
+*.coveragexml
+
+# Others
+*.vs/
+.env
+.env.local
+
+# Optional for Linux/macOS builds
+*.pid
