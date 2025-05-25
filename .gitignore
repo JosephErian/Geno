@@ -1,6 +1,8 @@
 # Build results
-bin/
-obj/
+/bin
+/obj
+obj
+obj/*
 out/
 
 # User-specific files
