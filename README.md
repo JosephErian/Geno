@@ -6,6 +6,8 @@ This document explains how authentication and authorization work in the Geno pro
 
 ## ✅ Overview
 
+### Modular Monolith with layered services
+
 - **Auth Type:** JWT (Bearer Tokens)
 - **Roles:** `ADMIN`, `CUSTOMER` (ASP.NET Identity)
 - **Token Handling:** Access + Refresh Token system
