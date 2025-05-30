@@ -23,6 +23,8 @@ builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailS
 builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<CustomerService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -41,7 +43,10 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    }); ;
 
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();

@@ -32,5 +32,28 @@ namespace Geno.Services
             await _db.SaveChangesAsync();
             return product;
         }
+
+        public async Task<Product?> UpdateAsync(Product product)
+        {
+            var existing = await _db.Products.FirstOrDefaultAsync(p => p.I3D == product.I3D);
+
+            if (existing == null)
+                return null; // or throw exception
+
+            // Update properties
+            existing.Name = product.Name;
+            existing.Price = product.Price;
+            existing.Category = product.Category;
+            existing.Zone = product.Zone;
+            existing.ExpiredAt = product.ExpiredAt;
+            existing.StockedAt = product.StockedAt;
+            existing.Quantity = product.Quantity;
+            existing.Rate = product.Rate;
+            existing.Details = product.Details;
+
+            await _db.SaveChangesAsync();
+
+            return existing;
+        }
     }
 }

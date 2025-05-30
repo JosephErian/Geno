@@ -5,7 +5,6 @@ using Geno.Services;
 
 namespace Geno.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
@@ -18,7 +17,11 @@ namespace Geno.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() => Ok(await _productService.GetAllAsync());
+        public async Task<IActionResult> GetAll()
+        {
+            var products = await _productService.GetAllAsync();
+            return Ok(products);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -34,7 +37,14 @@ namespace Geno.Controllers
         public async Task<IActionResult> Create([FromBody] Product product)
         {
             var created = await _productService.CreateAsync(product);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.I3D }, created);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Product product)
+        {
+            var existing = await _productService.UpdateAsync(product);
+            return CreatedAtAction(nameof(GetById), new { id = created.I3D }, created);
         }
     }
 }
