@@ -25,6 +25,12 @@ namespace Geno.Services
                             .Where(o => string.IsNullOrEmpty(name))
                             .ToListAsync();
         }
+        public async Task<List<Order>> GetByCustomerId(int id)
+        {
+            return await _db.Orders
+                            .Where(o => o.CustomerId == id)
+                            .ToListAsync();
+        }
 
         public async Task<Order> CreateAsync(Order order)
         {

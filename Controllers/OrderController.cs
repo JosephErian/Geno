@@ -30,6 +30,13 @@ namespace Geno.Controllers
             return order == null ? NotFound() : Ok(order);
         }
 
+        [HttpGet("{customerId}")]
+        public async Task<IActionResult> GetByCustomerId(int customerId)
+        {
+            var order = await _orderService.GetByCustomerId(customerId);
+            return order == null ? NotFound() : Ok(order);
+        }
+
         [HttpGet("filter")]
         public async Task<IActionResult> Filter([FromQuery] string? name) => Ok(await _orderService.FilterAsync(name));
 
