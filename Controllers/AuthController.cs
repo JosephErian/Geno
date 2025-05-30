@@ -5,7 +5,7 @@ using Geno.Services;
 namespace Geno.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly AuthService _authService;
