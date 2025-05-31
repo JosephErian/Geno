@@ -7,9 +7,9 @@ namespace Geno.Models
         public int I3D { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
-        public int OrderByCustomerPhone { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
+        public string OrderByCustomerPhone { get; set; }
         public OrderStatus OrderStatus;
         public DeliveryStatus DeliveryStatus;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

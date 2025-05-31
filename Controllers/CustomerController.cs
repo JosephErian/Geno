@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Geno.Models;
 using Geno.Services;
+using Geno.Models.DTOs;
 
 namespace Geno.Controllers
 {
@@ -34,7 +35,7 @@ namespace Geno.Controllers
         public async Task<IActionResult> Filter([FromQuery] string? name, int? id) => Ok(await _customerService.FilterAsync(name, id));
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Customer customer)
+        public async Task<IActionResult> Create([FromBody] CreateCustomerDto customer)
         {
             var created = await _customerService.CreateAsync(customer);
             return CreatedAtAction(nameof(GetById), new { id = created.I3D }, created);

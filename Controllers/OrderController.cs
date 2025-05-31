@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Geno.Models;
 using Geno.Services;
+using Geno.Models.DTOs;
 
 namespace Geno.Controllers
 {
@@ -30,7 +31,7 @@ namespace Geno.Controllers
             return order == null ? NotFound() : Ok(order);
         }
 
-        [HttpGet("{customerId}")]
+        [HttpGet("customer/{customerId}")]
         public async Task<IActionResult> GetByCustomerId(int customerId)
         {
             var order = await _orderService.GetByCustomerId(customerId);
@@ -41,24 +42,18 @@ namespace Geno.Controllers
         public async Task<IActionResult> Filter([FromQuery] string? name) => Ok(await _orderService.FilterAsync(name));
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Order order)
+        public async Task<IActionResult> CreateOrUpdateAsync([FromBody] CreateOrderDto order)
         {
-            var created = await _orderService.CreateAsync(order);
-            return CreatedAtAction(nameof(GetById), new { id = created.I3D }, created);
-        }
+            var result = await _orderService.CreateOrUpdateAsync(order);
+            if (result == null) return BadRequest("Invalid customer, employee, or product data.");
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Order order)
-        {
-            if (id != order.I3D)
-                return BadRequest("ID mismatch");
+            if (order.I3D == 0)
+            {
+                // New order was created
+                return CreatedAtAction(nameof(GetById), new { id = result.I3D }, result);
+            }
 
-            var updatedOrder = await _orderService.UpdateAsync(order);
-
-            if (updatedOrder == null)
-                return NotFound();
-
-            return Ok(updatedOrder);
+            return Ok(result);
         }
     }
 }

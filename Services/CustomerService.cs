@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Geno.Data;
 using Geno.Models;
+using Geno.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Geno.Services
@@ -26,10 +27,23 @@ namespace Geno.Services
                             .ToListAsync();
         }
 
-        public async Task<Customer> CreateAsync(Customer customer)
+        public async Task<Customer?> CreateAsync(CreateCustomerDto dto)
         {
+            var customer = new Customer
+            {
+                FirstName = dto.FirstName,
+                Email = dto.Email,
+                LastName = dto.LastName,
+                Phone = dto.Phone,
+                Address = dto.Address,
+                PostalCode = "",
+                Orders = new List<Order>(),
+                TotalQuantity = 0
+            };
+
             _db.Customers.Add(customer);
             await _db.SaveChangesAsync();
+
             return customer;
         }
         public async Task<Customer?> UpdateAsync(Customer customer)
